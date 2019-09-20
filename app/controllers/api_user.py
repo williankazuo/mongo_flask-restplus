@@ -45,7 +45,7 @@ class UserId(Resource):
         response, code = delete_user(id)
         return response, code
 
-
+    @api_user.expect(user_put_model)
     def put(self, id):
         response, code = update_user(id, request.json)
         return response, code

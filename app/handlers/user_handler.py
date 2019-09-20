@@ -24,6 +24,7 @@ def get_all_users():
 
     return response, 200
 
+
 def get_user_by_id(id):
     result = mongo.db.users.find_one({'_id' : ObjectId(id)})
     if result is None:
@@ -31,11 +32,12 @@ def get_user_by_id(id):
 
     return encodeMongo(result), 200
 
+
 def delete_user(id):
     try:
         result = mongo.db.users.delete_one({'_id': ObjectId(id)})
         if result.deleted_count is not 1:
-            return {'message': f'Id não encontrado'}, 404
+            return {'message': f'Usuário com id: {id} não encontrado'}, 400
         else:
             return {'_id' : f'{id}'}, 200
     except Exception as e:
@@ -43,5 +45,18 @@ def delete_user(id):
 
     return {'message': f'Erro ao deletar usuário'}, 400
 
+
 def update_user(id, data):
-    pass
+    result = mongo.db.users.find_one({'_id': ObjectId(id)})
+    if result is not None:
+        result['usuario'] = data['usuario']
+        result['nome'] = data['nome']
+        result['cpf'] = data['cpf']
+        result['update_at'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        
+        try:
+            mongo.db.users.update({'_id': ObjectId(id)}, result)
+            return encodeMongo(result), 200
+        except Exception as e:
+            print(f'Error: {e}')
+    return {'message': f'Usuário com id: {id} não encontrado'}, 400

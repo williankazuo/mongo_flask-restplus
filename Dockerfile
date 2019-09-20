@@ -1,6 +1,6 @@
 FROM python:3.6
 ENV PYTHONUNBUFFERED 1
-RUN apt-get install -y python3-pip python3-dev build-essential
+RUN apt-get update -y && apt-get install -y python3-pip python3-dev build-essential
 
 COPY . /app
 WORKDIR /app

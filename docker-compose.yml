@@ -1,7 +1,7 @@
 version: "3"
 services:
   mongo:
-    image: mongodb
+    image: mongo
     restart: always
     volumes:
       - ./mongodb/mongodbdata:/data/db

@@ -1,0 +1,17 @@
+version: "3"
+services:
+  mongo:
+    image: mongodb
+    restart: always
+    volumes:
+      - ./mongodb/mongodbdata:/data/db
+    ports:
+      - 27017:27017
+  user:
+    build: .
+    command: python3 run.py
+    ports: 5000:5000
+    environment:
+      MONGO_URL: mongo
+    depends_on:
+      - mongo

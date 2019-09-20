@@ -1,0 +1,17 @@
+.git
+.git/
+.git/*
+
+.vscode
+.vscode/
+.vscode/*
+
+mongodb/
+mongodb/*
+
+*.md
+
+.gitignore
+
+venv_mongo/
+venv_mongo/*

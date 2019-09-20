@@ -10,7 +10,8 @@ services:
   user:
     build: .
     command: python3 run.py
-    ports: 5000:5000
+    ports:
+      - 5000:5000
     environment:
       MONGO_URL: mongo
     depends_on:
